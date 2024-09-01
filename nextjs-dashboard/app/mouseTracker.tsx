@@ -1,10 +1,12 @@
 'use client'
 import React, { useRef, useEffect } from 'react';
+import Canvas from './canvas';
 
 
 let globalPos: any
 let mouseClicked: any
 let ctx
+let temp
 let isDrawingOnCanvas
 
 export const useMousePosition = () => { 
@@ -50,7 +52,7 @@ export const checkMouseDown = () =>{
 
 
   function handleMouseUp(){
-    setMouseClicked(false);
+    //setMouseClicked(false);
     mouseClicked = false;
     //console.log("mouse up - set to " + mouseClick);
   }
@@ -72,41 +74,48 @@ export const checkMouseDown = () =>{
 
 
 
-const drawAtPos = (x,y) => {
-  console.log("drawing");
-  ctx = document.getElementById("myCanvas").getContext("2d");
-  ctx.beginPath();
-  ctx.arc(x, y, 1, 0, 2 * Math.PI);
-  ctx.fillStyle = "rgb(0 0 200 / 50%)";
-  ctx.fill();
-  ctx.lineWidth = 5;
-  ctx.strokeStyle = '#003300';
-  ctx.stroke(); 
+const drawAtPos = (x: number, y: number) => {
+
+    console.log("drawing");
+    temp = document.getElementById("myCanvas") as HTMLCanvasElement;
+    ctx = temp.getContext("2d");
+    if (ctx) {
+        ctx.beginPath();
+        ctx.arc(x, y, 1, 0, 2 * Math.PI);
+        ctx.fillStyle = "rgb(0 0 200 / 50%)";
+        ctx.fill();
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = '#003300';
+        ctx.stroke(); 
+    }
 }
 
 
 export const MyCanvasFunction = () => {
-  React.useEffect(() => {
-    const c = document.getElementById("myCanvas");
-    ctx = c.getContext("2d");
-    ctx.fillStyle = "lightBlue"
-    ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    React.useEffect(() => {
+        const c = document.getElementById("myCanvas") as HTMLCanvasElement;
+        ctx = c.getContext("2d");
+        if (ctx) {
+            ctx.fillStyle = "lightBlue"
+            ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+        }
+        
 
-  }, []);
+    }, []);
 
-  return (
-    <div>
-      <h1>HTML5 Canvas + React.js</h1>
-      <canvas
-        id="myCanvas"
-        width="1500"
-        height="500"
-        style={{ border: "1px solid #d3d3d3" }}
-      >
-        Your browser does not support the HTML canvas tag.
-      </canvas>
-    </div>
-  );
+    return (
+        <div>
+         <h1>HTML5 Canvas + React.js</h1>
+        <canvas
+         id="myCanvas"
+            width="1500"
+            height="500"
+            style={{ border: "1px solid #d3d3d3" }}
+        >
+            Your browser does not support the HTML canvas tag.
+        </canvas>
+        </div>
+    );
 }
 
 //export default useMousePosition;
