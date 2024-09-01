@@ -2,15 +2,15 @@
 import React, { useRef, useEffect } from 'react';
 
 
-let globalPos
-let mouseClicked
+let globalPos: any
+let mouseClicked: any
 let ctx
 let isDrawingOnCanvas
 
 export const useMousePosition = () => { 
   const [mousePosition,setMousePosition] = React.useState({ x: null, y: null });
   React.useEffect(() => {
-    const updateMousePosition = ev => {
+    const updateMousePosition = (ev: { clientX: any; clientY: any; }) => {
       setMousePosition({ x: ev.clientX, y: ev.clientY });
     };
     window.addEventListener('mousemove', updateMousePosition);
@@ -26,7 +26,7 @@ export const useMousePosition = () => {
 export const checkMouseDown = () =>{
   const [mouseClick, setMouseDown] = React.useState(false);
 
-  function handleMouseDown(event){
+  function handleMouseDown(event: any){
     if (event.detail ===2){
       //console.log("something");
     }
