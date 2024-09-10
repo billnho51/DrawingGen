@@ -1,31 +1,52 @@
 import React, { useRef, useEffect } from 'react'
-import {UseOnDraw} from './hooks'
+import { UseOnDraw } from '../hooks'
+//import { getColor } from './colorControl'
+//import { getWidth } from './widthSlider'
 
-var color = 'black';
-var strokeWidth = 5;
-const Canvas =({width,height}) => {
+//var color = 'black';
+//var strokeWidth = 5;
+interface CanvasProps {
+    width: number;
+    height: number;   
+    lineColor: string;
+    lineWidth: number;
+    //mousePosition: { x: number; y: number };
+}
 
-    const {onMouseDown, setCanvasRef} = UseOnDraw(onDraw);
+const Canvas = ({ width, height, lineColor, lineWidth }: CanvasProps) => {
+    console.log("calling from canvas start color is:  " + lineColor);
 
+    const { onMouseDown, setCanvasRef } = UseOnDraw(onDraw);
+    
+    const colorRef = useRef(lineColor);
+    const widthRef = useRef(lineWidth);
+
+    // Update refs whenever lineColor or lineWidth changes
+    useEffect(() => {
+        colorRef.current = lineColor;
+        widthRef.current = lineWidth;
+    }, [lineColor, lineWidth]);
     
 
-    function onDraw(ctx, point, prevDrawPosRef){
+    function onDraw(ctx: CanvasRenderingContext2D, point: any, prevDrawPosRef: any) {
         
         //ctx.beginPath();
         //ctx.arc(x, y, 3, 0, 2 * Math.PI);
         //ctx.fillStyle = "black";
         //ctx.fill();
         //console.log(point);
-        drawLine(prevDrawPosRef, point, ctx, color, strokeWidth )
+        const currentColor = colorRef.current;
+        const currentWidth = widthRef.current;
+        drawLine(prevDrawPosRef, point, ctx, currentColor, currentWidth)
 
     }
 
-    function drawLine(start ,end, ctx, color, strokeWidth){
+    function drawLine(start: { canvasX: any; canvasY: any; } ,end: { canvasX: any; canvasY: any; }, ctx: CanvasRenderingContext2D, color: string, strokeWidth: number){
         if(!start) {
             start = end;
         }
         //console.log("start is: " + start.canvasX);
-        //console.log("end is: " + end.canvasX);
+        
         //ctx.beginPath();
         //ctx.lineWidth = 5;
         //ctx.fillStyle = "black";
@@ -62,12 +83,12 @@ const Canvas =({width,height}) => {
     );
 
 };
-export function updateColor(newColor){
-    color = newColor;
+export function updateColor(newColor: string){
+    //color = newColor;
 }
 
-export function updateWidth(newWidth){
-    strokeWidth = newWidth;
+export function updateWidth(newWidth: number){
+    //strokeWidth = newWidth;
 }
 
 export default Canvas

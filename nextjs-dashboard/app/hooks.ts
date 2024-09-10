@@ -1,18 +1,23 @@
 import { useEffect, useRef } from "react";
 
-export function UseOnDraw(sth){
+export function UseOnDraw(sth: any){
     console.log("hallo");
 
-    const canvasRef = useRef(null);
+    const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
     const isDrawingRef = useRef(false);
     
     //store refference to function to still have access to function after window rerenders
-    const mouseMoveListenerRef = useRef(null);
+    //const mouseMoveListenerRef = useRef(null);
     //not using anymore since passing straigh from canvas ref
     //const mouseDownListenerRef = useRef(null);
-    const mouseUpListenerRef = useRef(null);
-    const prevDrawPosRef = useRef(null);
+    //const mouseUpListenerRef = useRef(null);
+    //const prevDrawPosRef = useRef(null);
+
+    // store reference to function to still have access to function after window rerenders
+    const mouseMoveListenerRef = useRef<((event: MouseEvent) => void) | null>(null);
+    const mouseUpListenerRef = useRef<(() => void) | null>(null);
+    const prevDrawPosRef = useRef<{ canvasX: number; canvasY: number } | null>(null);
 
 
     //clean up listener after use
@@ -32,7 +37,7 @@ export function UseOnDraw(sth){
     
         function onMouseMove(){
             if (!canvasRef.current) return;
-            const mouseMoveListener = (event) => {
+            const mouseMoveListener = (event: any) => {
                 if (!isDrawingRef.current) return;
                 const point = computeCanvasPos(event.x, event.y);
                 
@@ -43,7 +48,7 @@ export function UseOnDraw(sth){
                 //ctx.fill();
                 
                 //const myCanvas = document.getElementById("myCanvas")
-                const ctx = canvasRef.current.getContext("2d");
+                const ctx = canvasRef.current?.getContext("2d");
                 //console.log(prevDrawPosRef);
                 if (sth) sth( ctx, point, prevDrawPosRef.current)
                 
@@ -55,7 +60,7 @@ export function UseOnDraw(sth){
     
         }
 
-        function computeCanvasPos(x,y){
+        function computeCanvasPos(x: number,y: number){
             if(canvasRef.current){
                 const boundingRect = canvasRef.current.getBoundingClientRect();
                 return {
@@ -89,7 +94,7 @@ export function UseOnDraw(sth){
 
     },[]);
 
-    function setCanvasRef(ref){
+    function setCanvasRef(ref: any){
         canvasRef.current = ref;
     }
 

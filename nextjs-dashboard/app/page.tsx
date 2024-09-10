@@ -1,41 +1,26 @@
 'use client'
 import React , {useState} from "react";
-import Canvas, { updateWidth } from "./canvas";
+import Canvas, { updateWidth } from "./components/canvas";
 import { Console } from "console";
-import { updateColor } from "./canvas";
+import { updateColor } from "./components/canvas";
+import ColorControls from './components/colorControl'
+import WidthSlider from './components/widthSlider'
 
 
 export default function page(){
 
     const [sliderValue, setSliderValue] = useState(1);
-
-    function randomColor() {
-        const r = Math.floor(Math.random() * 256); // Random value between 0 and 255 for red
-        const g = Math.floor(Math.random() * 256); // Random value between 0 and 255 for green
-        const b = Math.floor(Math.random() * 256); // Random value between 0 and 255 for blue
-        return `rgb(${r}, ${g}, ${b})`; // Construct a CSS RGB color string
-    }
-    const handleUpdateColor = () => {
-        updateColor(randomColor());
-    };
-
-    const handleUpdateSlider = (event: React.ChangeEvent<HTMLInputElement>) =>{
-        const value = event.target.value;
-        setSliderValue(Number(value));
-        updateWidth(Number(value));
-    }
+    const [color, setColor] = useState('black');
+    const [width, setWidth] = useState(1);
 
     return (
     <div>
         <p>hallo somebody</p>
-        &nbsp;&nbsp;&nbsp;
-        <button type="button" onClick={handleUpdateColor} style={buttonStyle} >Random Color</button>
-        &nbsp;&nbsp;&nbsp;
-        <input id="typeinp" type="range" min="1" max="100" value={sliderValue} onChange= {handleUpdateSlider} step="1"/>
 
-        <Canvas
-            width={1500} height={500}
-        />
+
+        <ColorControls onUpdateColor={setColor} />
+        <WidthSlider sliderValue={width} onUpdateSlider={setWidth} />
+        <Canvas width={1500} height={500} lineColor={color} lineWidth={width} />
         
         
         

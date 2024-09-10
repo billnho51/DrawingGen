@@ -1,7 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\app"
+    "\\app",
+    "\\app\\components",
+    "\\app\\hooks",
+    "\\app\\utils",
+    "\\public"
   ],
+  "SelectedNode": "\\app\\hooks.ts",
   "PreviewInSolutionExplorer": false
 }
