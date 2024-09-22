@@ -83,14 +83,6 @@ const Canvas = ({ width, height, lineColor, lineWidth }: CanvasProps) => {
     );
 
 };
-export function updateColor(newColor: string){
-    //color = newColor;
-}
-
-export function updateWidth(newWidth: number){
-    //strokeWidth = newWidth;
-}
-
 export default Canvas
 
 const canvasStyle ={

@@ -1,8 +1,7 @@
 'use client'
 import React , {useState} from "react";
-import Canvas, { updateWidth } from "./components/canvas";
 import { Console } from "console";
-import { updateColor } from "./components/canvas";
+import Canvas from './components/canvas'
 import ColorControls from './components/colorControl'
 import WidthSlider from './components/widthSlider'
 
@@ -16,20 +15,12 @@ export default function page(){
     return (
     <div>
         <p>hallo somebody</p>
-
-
         <ColorControls onUpdateColor={setColor} />
         <WidthSlider sliderValue={width} onUpdateSlider={setWidth} />
         <Canvas width={1500} height={500} lineColor={color} lineWidth={width} />
-        
-        
-        
     </div>
-    
-    
     );
 }
-
 //styling and css
 const buttonStyle = {
     backgroundColor: 'gray',

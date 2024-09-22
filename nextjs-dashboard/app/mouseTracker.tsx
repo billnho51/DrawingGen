@@ -1,6 +1,6 @@
 'use client'
 import React, { useRef, useEffect } from 'react';
-import Canvas from './canvas';
+import Canvas from './components/canvas';
 
 
 let globalPos: any
