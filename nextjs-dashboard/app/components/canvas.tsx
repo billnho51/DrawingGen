@@ -6,6 +6,7 @@ import { UseOnDraw } from '../hooks'
 //var color = 'black';
 //var strokeWidth = 5;
 interface CanvasProps {
+    id: string;
     width: number;
     height: number;   
     lineColor: string;
@@ -13,7 +14,7 @@ interface CanvasProps {
     //mousePosition: { x: number; y: number };
 }
 
-const Canvas = ({ width, height, lineColor, lineWidth }: CanvasProps) => {
+const Canvas = ({id, width, height, lineColor, lineWidth }: CanvasProps) => {
     console.log("calling from canvas start color is:  " + lineColor);
 
     const { onMouseDown, setCanvasRef } = UseOnDraw(onDraw);
@@ -74,6 +75,7 @@ const Canvas = ({ width, height, lineColor, lineWidth }: CanvasProps) => {
 
     return(
         <canvas
+            id={id}
             width={width}
             height={height}
             onMouseDown = {onMouseDown}

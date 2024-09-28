@@ -4,8 +4,7 @@
     "\\app",
     "\\app\\components",
     "\\app\\hooks",
-    "\\app\\utils",
-    "\\public"
+    "\\app\\utils"
   ],
   "PreviewInSolutionExplorer": false
 }
