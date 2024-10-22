@@ -3,7 +3,6 @@
     "",
     "\\app",
     "\\app\\components",
-    "\\app\\hooks",
     "\\app\\utils"
   ],
   "PreviewInSolutionExplorer": false

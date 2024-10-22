@@ -5,3 +5,6 @@
 /nextjs-dashboard/.vs
 /nextjs-dashboard/.vs
 /nextjs-dashboard/.vs/nextjs-dashboard/v17
+*.vsidx
+/nextjs-dashboard/.vs/nextjs-dashboard/v17
+/nextjs-dashboard/.vs
